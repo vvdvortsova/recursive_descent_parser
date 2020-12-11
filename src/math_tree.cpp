@@ -27,6 +27,8 @@ Node *getN(std::vector<Token *>::iterator* iterator);
 
 bool requirePair(std::vector<Token *>::iterator* iterator);
 
+Node *getS(std::vector<Token *>::iterator *pIterator);
+
 /**
 * @brief      Compare a double variable with zero
 * @param[in]  a  double variable
@@ -46,6 +48,8 @@ const char* getNameOfOp(OP_TYPE type) {
             return "/";
         case MUL:
             return "*";
+        case POW:
+            return "^";
         case NUM:
             return nullptr;
     }
@@ -139,6 +143,14 @@ std::vector<Token*> doLexer(char* expr) {
                 if(strlen(token) > 1)token++;
                 else break;
             }
+            else if(strncmp(token,"^",1) == 0) {
+                auto elem = new Pow();
+                elem->setNumber(countOP);
+                tokens.push_back(elem);
+                countOP++;
+                if(strlen(token) > 1)token++;
+                else break;
+            }
             else if(strncmp(token,")", 1) == 0) {
                 auto elem = new Pair(CLOSE);
                 elem->setNumber(countOP);
@@ -158,7 +170,7 @@ std::vector<Token*> doLexer(char* expr) {
                         num = -num;
                         countOP++;
                     }
-                    auto elem = new Var(num);
+                    auto elem = new Num(num);
                     elem->setNumber(countOP++);
                     tokens.push_back(elem);
                     if((strncmp(next,"",1) != 0) && (strncmp(next,"\n",1) != 0)) token = next;
@@ -184,8 +196,11 @@ std::vector<Token*> doLexer(char* expr) {
             std::cout << "mul\n";
         } else if (dynamic_cast<Div*>(*it) != nullptr) {
             std::cout << "div\n";
-        } else if (dynamic_cast<Var*>(*it) != nullptr) {
-            std::cout << "var(" << dynamic_cast<Var*>(*it)->getValue() << ")\n";
+        } else if (dynamic_cast<Pow*>(*it) != nullptr) {
+            std::cout << "pow\n";
+        }
+        else if (dynamic_cast<Num*>(*it) != nullptr) {
+            std::cout << "Num(" << dynamic_cast<Num*>(*it)->getValue() << ")\n";
         }
     }
 
@@ -233,11 +248,11 @@ Node* createNode(Node* lNode, Node* rNode, OP_TYPE type, int index) {
 }
 
 Node* getT(std::vector<Token *>::iterator* iter) {
-    Node* lval = getP(iter);
+    Node* lval = getS(iter);
     while (dynamic_cast<Mul*>(**iter) != nullptr || dynamic_cast<Div*>(**iter) != nullptr) {
         Token* op = **iter;
         (*iter)++;
-        Node* rval = getP(iter);
+        Node* rval = getS(iter);
         if(dynamic_cast<Mul*>(op) != nullptr) {
             lval = createNode(lval, rval, MUL, (**iter)->getNumber());
         } else
@@ -245,6 +260,23 @@ Node* getT(std::vector<Token *>::iterator* iter) {
     }
     return lval;
 }
+
+Node *getS(std::vector<Token *>::iterator *iter) {
+    Node* lval = getP(iter);
+    while (dynamic_cast<Pow*>(**iter) != nullptr) {
+        Token* op = **iter;
+        (*iter)++;
+        Node* rval = getP(iter);
+        if(dynamic_cast<Pow*>(op) != nullptr) {
+            lval = createNode(lval, rval, POW, (**iter)->getNumber());
+        } else {
+            //todo
+            return nullptr;
+        }
+    }
+    return lval;
+}
+
 
 Node* getP(std::vector<Token *>::iterator* iter) {
     if (dynamic_cast<Pair*>(**iter) != nullptr) {
@@ -276,11 +308,11 @@ bool requirePair(std::vector<Token *>::iterator* iter) {
 }
 
 Node* getN(std::vector<Token *>::iterator* iter) {
-    if(dynamic_cast<Var*>(**iter) != nullptr) {
+    if(dynamic_cast<Num*>(**iter) != nullptr) {
         Node* nodeVar;
         nodeVar =  new Node();
         nodeVar->type = NUM;
-        auto elem = dynamic_cast<Var*>(**iter);
+        auto elem = dynamic_cast<Num*>(**iter);
         nodeVar->value =  elem->getValue();
         nodeVar->leftChild = nullptr;
         nodeVar->rightChild = nullptr;
@@ -366,11 +398,11 @@ Node* buildTree(std::vector<Token*>* tokens) {
                 }
                 continue;
             }
-        } else if(dynamic_cast<Var*>(*it) != nullptr) {
+        } else if(dynamic_cast<Num*>(*it) != nullptr) {
             Node* nodeVar;
             nodeVar =  new Node();
             nodeVar->type = NUM;
-            auto elem = dynamic_cast<Var*>(*it);
+            auto elem = dynamic_cast<Num*>(*it);
             nodeVar->value =  elem->getValue();
             nodeVar->leftChild = nullptr;
             nodeVar->rightChild = nullptr;
@@ -520,6 +552,8 @@ int calculate(Node* tree) {
                 return a - b;
             case DIV:
                 return a / b;
+            case POW:
+                return pow(a,b);
             case NUM:
                 break;
         }

@@ -13,7 +13,8 @@ enum OP_TYPE {
     SUB = 1,
     DIV = 2,
     MUL = 3,
-    NUM = 4
+    POW = 4,
+    NUM = 5
 };
 
 
@@ -47,10 +48,10 @@ public:
     int getPriority() const { return priority;};
 };
 
-class Var:     public Token {
+class Num: public Token {
     double value;
 public:
-    explicit Var(double val): Token(0), value(val) {}
+    explicit Num(double val): Token(0), value(val) {}
     double getValue() const { return value;}
 };
 class UnMinus: public Token {
@@ -73,6 +74,12 @@ class Div:     public Token {
 public:
     explicit Div(): Token(2){}
 };
+
+class Pow:     public Token {
+public:
+    explicit Pow(): Token(3){}
+};
+
 class Pair:    public Token {
     OP_PAIR pType;
 public:

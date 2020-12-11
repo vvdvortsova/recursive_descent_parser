@@ -1,49 +1,49 @@
 graph astdump {
-res [shape=doubleoctagon][label="result = -18"]
-_0_0[shape=box, color=blue]
-_0_0[label="+"]
-_0_0 -- _13_0;
-_0_0 -- _24_1;
-_13_0[shape=box, color=blue]
-_13_0[label="+"]
-_13_0 -- _3_0;
-_13_0 -- _13_2;
-_3_0[shape=box, color=blue]
-_3_0[label="+"]
-_3_0 -- _0V
-_0V [label="1"]
-_3_0 -- _2V2;
-_2V2 [label="2"]
-_13_2[shape=box, color=blue]
-_13_2[label="/"]
-_13_2 -- _11_3;
-_13_2 -- _12V9;
-_12V9 [label="9"]
-_11_3[shape=box, color=blue]
-_11_3[label="*"]
-_11_3 -- _8_0;
-_11_3 -- _10V5;
-_10V5 [label="5"]
-_8_0[shape=box, color=blue]
-_8_0[label="+"]
-_8_0 -- _5V
-_5V [label="3"]
-_8_0 -- _7V9;
-_7V9 [label="9"]
-_24_1[shape=box, color=blue]
-_24_1[label="-"]
-_24_1 -- _15V
-_15V [label="1"]
-_24_1 -- _24_3;
-_24_3[shape=box, color=blue]
-_24_3[label="*"]
-_24_3 -- _17V
-_17V [label="4"]
-_24_3 -- _23_0;
-_23_0[shape=box, color=blue]
-_23_0[label="+"]
-_23_0 -- _20V
-_20V [label="2"]
-_23_0 -- _22V5;
-_22V5 [label="5"]
+res [shape=doubleoctagon][label="result = 93"]
+_0_1[shape=box, color=blue]
+_0_1[label="-"]
+_0_1 -- _19_0;
+_0_1 -- _20V4;
+_20V4 [label="4"]
+_19_0[shape=box, color=blue]
+_19_0[label="+"]
+_19_0 -- _7_0;
+_19_0 -- _19_2;
+_7_0[shape=box, color=blue]
+_7_0[label="+"]
+_7_0 -- _5_3;
+_7_0 -- _6V1;
+_6V1 [label="1"]
+_5_3[shape=box, color=blue]
+_5_3[label="*"]
+_5_3 -- _0V
+_0V [label="4"]
+_5_3 -- _5_4;
+_5_4[shape=box, color=blue]
+_5_4[label="^"]
+_5_4 -- _2V
+_2V [label="2"]
+_5_4 -- _4V2;
+_4V2 [label="2"]
+_19_2[shape=box, color=blue]
+_19_2[label="/"]
+_19_2 -- _17_3;
+_19_2 -- _18V9;
+_18V9 [label="9"]
+_17_3[shape=box, color=blue]
+_17_3[label="*"]
+_17_3 -- _15_3;
+_17_3 -- _16V9;
+_16V9 [label="9"]
+_15_3[shape=box, color=blue]
+_15_3[label="*"]
+_15_3 -- _8V
+_8V [label="4"]
+_15_3 -- _14_0;
+_14_0[shape=box, color=blue]
+_14_0[label="+"]
+_14_0 -- _11V
+_11V [label="12"]
+_14_0 -- _13V8;
+_13V8 [label="8"]
 }
