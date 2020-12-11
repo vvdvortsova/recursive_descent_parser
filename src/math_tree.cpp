@@ -1,6 +1,6 @@
 /**
 * @file         math_tree.cpp
-* @brief        Definitions of methods for ast dumps
+* @brief        Definitions of methods for recursive descent parser
 * @author       Dvortsova Varvara BSE182 HSE
 */
 #include "math_tree.h"
@@ -239,7 +239,7 @@ Node* syntaxAnalize(std::vector<Token*>* tokens) {
     return tree;
 }
 
-Node* getG(std::vector<Token *>::iterator* iter) {
+Node* getG(std::vector<Token*>::iterator* iter) {
     Node* val = getE(iter);
     if(dynamic_cast<End*>(**iter) != nullptr) {
         return val;
@@ -249,7 +249,7 @@ Node* getG(std::vector<Token *>::iterator* iter) {
     }
 }
 
-Node* getE(std::vector<Token *>::iterator* iter) {
+Node* getE(std::vector<Token*>::iterator* iter) {
     Node* lval = getT(iter);
     while(dynamic_cast<Add*>(**iter) != nullptr || dynamic_cast<Sub*>(**iter) != nullptr) {
         Token* op = **iter;
@@ -272,7 +272,7 @@ Node* createNode(Node* lNode, Node* rNode, OP_TYPE type, int index) {
     return node;
 }
 
-Node* getT(std::vector<Token *>::iterator* iter) {
+Node* getT(std::vector<Token*>::iterator* iter) {
     Node* lval = getS(iter);
     while (dynamic_cast<Mul*>(**iter) != nullptr || dynamic_cast<Div*>(**iter) != nullptr) {
         Token* op = **iter;
@@ -286,7 +286,7 @@ Node* getT(std::vector<Token *>::iterator* iter) {
     return lval;
 }
 
-Node *getS(std::vector<Token *>::iterator *iter) {
+Node* getS(std::vector<Token*>::iterator *iter) {
     Node* lval = getP(iter);
     while (dynamic_cast<Pow*>(**iter) != nullptr) {
         Token* op = **iter;
@@ -303,7 +303,7 @@ Node *getS(std::vector<Token *>::iterator *iter) {
 }
 
 
-Node* getP(std::vector<Token *>::iterator* iter) {
+Node* getP(std::vector<Token*>::iterator* iter) {
     if (dynamic_cast<Pair*>(**iter) != nullptr) {
         auto item = dynamic_cast<Pair*>(**iter);
         if(item->getType() == OPEN) {
@@ -324,7 +324,7 @@ Node* getP(std::vector<Token *>::iterator* iter) {
     return nullptr;
 }
 
-Node* getId(std::vector<Token *>::iterator* iter) {
+Node* getId(std::vector<Token*>::iterator* iter) {
     if(dynamic_cast<Var*>(**iter) != nullptr) {
         Node* nodeVar =  new Node();
         nodeVar->type = VAR;
@@ -368,7 +368,7 @@ Node* createUnaryNode(Node* val, OP_TYPE type, int number) {
     return nodeVar;
 }
 
-bool requirePair(std::vector<Token *>::iterator* iter) {
+bool requirePair(std::vector<Token*>::iterator* iter) {
     if (dynamic_cast<Pair*>(**iter) != nullptr) {
         auto item = dynamic_cast<Pair*>(**iter);
         if(item->getType() == CLOSE) {
@@ -379,7 +379,7 @@ bool requirePair(std::vector<Token *>::iterator* iter) {
     return false;
 }
 
-Node* getN(std::vector<Token *>::iterator* iter) {
+Node* getN(std::vector<Token*>::iterator* iter) {
     if(dynamic_cast<Num*>(**iter) != nullptr) {
         Node* nodeNum = new Node();
         nodeNum->type = NUM;

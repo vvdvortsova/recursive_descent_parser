@@ -170,24 +170,24 @@ const char* getNameOfOp(OP_TYPE type);
  */
 double calculate(Node* tree);
 
-Node *getG(std::vector<Token *>::iterator* iterator);
+Node* getG(std::vector<Token*>::iterator* iterator);
 
-Node *getE(std::vector<Token *>::iterator* iterator);
+Node* getE(std::vector<Token*>::iterator* iterator);
 
-Node *getT(std::vector<Token *>::iterator* iterator);
+Node* getT(std::vector<Token*>::iterator* iterator);
 
-Node *createNode(Node *pNode, Node *pNode1, OP_TYPE type, int index);
+Node* createNode(Node* lNode, Node* rNode, OP_TYPE type, int index);
 
-Node *getP(std::vector<Token *>::iterator* iterator);
+Node* getP(std::vector<Token*>::iterator* iterator);
 
-Node *getN(std::vector<Token *>::iterator* iterator);
+Node* getN(std::vector<Token*>::iterator* iterator);
 
-bool requirePair(std::vector<Token *>::iterator* iterator);
+bool requirePair(std::vector<Token*>::iterator* iterator);
 
-Node *getS(std::vector<Token *>::iterator *pIterator);
+Node* getS(std::vector<Token*>::iterator* pIterator);
 
-Node *getId(std::vector<Token *>::iterator *pIterator);
+Node* getId(std::vector<Token*>::iterator* pIterator);
 
-Node *createUnaryNode(Node *pNode, OP_TYPE type, int number);
+Node* createUnaryNode(Node* pNode, OP_TYPE type, int number);
 
 #endif //PARSE_TREE_OF_MATHEMATICAL_EXPRESSIONS_MATH_TREE_H
