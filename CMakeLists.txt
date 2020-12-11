@@ -8,11 +8,14 @@ add_compile_options(-Wall -Wextra -pedantic -Wfloat-equal -fno-stack-protector)
 add_executable(recursive_descent_parser
         main.cpp
         src/math_tree.cpp
-        src/math_tree.h
-        )
+        src/math_tree.h)
 
 add_executable(treeExpr
         src/treeExpr.cpp
         src/math_tree.cpp
+        src/math_tree.h)
+
+add_executable(eval
+        src/math_tree.cpp
         src/math_tree.h
-        )
+        src/eval.cpp)

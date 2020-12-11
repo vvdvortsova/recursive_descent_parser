@@ -5,3 +5,5 @@
 /Makefile
 /CMakeFiles/
 /treeExpr
+/eval
+/recursive_descent_parser.cbp

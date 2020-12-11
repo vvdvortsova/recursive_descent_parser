@@ -40,8 +40,14 @@ sudo apt install graphviz
 - Test project
     - test/
 ## Run
+How to use calculator
+```bash
+cmake .
+make
+./eval "sin(1+2)+cos(6)*3-5"
+```
 
-How to run
+How to run with dumps
 ```bash
 cmake .
 make
