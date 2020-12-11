@@ -3,6 +3,8 @@
 #include <cstring>
 #include "math_tree.h"
 
+//TODO clean up and simplify flags
+//TODO add default open for graviz and tex
 int main(int argc, char** argv) {
     if(argc == 1) {
         printf("\t\t./treeExpr [flag] [outFile] [expr]\n");
@@ -19,7 +21,7 @@ int main(int argc, char** argv) {
     if(argc == 4) {
         char grName[100] = "";
         auto a = doLexer(argv[3]);
-        auto tree = buildTree(&a);
+        auto tree = syntaxAnalize(&a);
         if(strncmp(argv[1], "-a", 2) == 0) {
             sprintf(grName,"%s_grav.dot", argv[2]);
             gravizDump(grName, tree);
@@ -52,7 +54,7 @@ int main(int argc, char** argv) {
     }
     if(argc == 3) {
         auto a = doLexer(argv[2]);
-        auto tree = buildTree(&a);
+        auto tree = syntaxAnalize(&a);
         char grName[100] = "";
         sprintf(grName,"%s_grav.dot", argv[1]);
         gravizDump(grName, tree);

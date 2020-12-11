@@ -14,7 +14,12 @@ enum OP_TYPE {
     DIV = 2,
     MUL = 3,
     POW = 4,
-    NUM = 5
+    X   = 5,
+    Y   = 6,
+    SIN = 7,
+    COS = 8,
+    VAR = 10,
+    NUM = 9
 };
 
 
@@ -28,6 +33,7 @@ enum OP_PAIR {
  */
 typedef struct Node {
     OP_TYPE type;
+    char chVar;
     double value;
     double index;
     Node* leftChild;
@@ -54,9 +60,25 @@ public:
     explicit Num(double val): Token(0), value(val) {}
     double getValue() const { return value;}
 };
+
+class Var:     public Token {
+    char ch;
+public:
+    explicit Var(char _ch): Token(0), ch(_ch){}
+    char getCh() const { return ch;}
+};
+
 class UnMinus: public Token {
 public:
     explicit UnMinus(): Token(2){};
+};
+class Sin:     public Token {
+public:
+    explicit Sin(): Token(3){};
+};
+class Cos:     public Token {
+public:
+    explicit Cos(): Token(3){};
 };
 class Mul:     public Token {
 public:
@@ -97,32 +119,19 @@ char* getExpressionFromFile(char* fName, int* size);
 
 
 /**
- * Method splits line into tokens.
- * It is important to use space when you write brackets.
- * Example: ( 1 + 2 ) not (1+2) or (1 + 2)
- * Do'not worry I'l fixed it as soon as possible.
- * @param expr
- * @param size
- * @return
- */
-std::vector<Token*> getTokens(char* expr);
-
-/**
- * I use the Shunting-Yard algorithm and build tree parallel
- * @param tokens
- * @return
- */
-Node* buildTree(std::vector<Token*>* tokens);
-
-
-/**
- * I use the Shunting-Yard algorithm and build tree parallel
+ * I use recursive descent algo
  * @param tokens
  * @return
  */
 Node* syntaxAnalize(std::vector<Token*>* tokens);
 
+/**
+ * Get tokens from exps
+ * @param expr
+ * @return
+ */
 std::vector<Token*> doLexer(char* expr);
+
 /**
  * Dumps tree into graviz format
  * @param outPath
@@ -159,6 +168,26 @@ const char* getNameOfOp(OP_TYPE type);
  * @param tree
  * @return
  */
-int calculate(Node* tree);
+double calculate(Node* tree);
+
+Node *getG(std::vector<Token *>::iterator* iterator);
+
+Node *getE(std::vector<Token *>::iterator* iterator);
+
+Node *getT(std::vector<Token *>::iterator* iterator);
+
+Node *createNode(Node *pNode, Node *pNode1, OP_TYPE type, int index);
+
+Node *getP(std::vector<Token *>::iterator* iterator);
+
+Node *getN(std::vector<Token *>::iterator* iterator);
+
+bool requirePair(std::vector<Token *>::iterator* iterator);
+
+Node *getS(std::vector<Token *>::iterator *pIterator);
+
+Node *getId(std::vector<Token *>::iterator *pIterator);
+
+Node *createUnaryNode(Node *pNode, OP_TYPE type, int number);
 
 #endif //PARSE_TREE_OF_MATHEMATICAL_EXPRESSIONS_MATH_TREE_H

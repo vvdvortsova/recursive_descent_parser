@@ -1,0 +1,16 @@
+graph astdump {
+res [shape=doubleoctagon][label="result = 62210"]
+_0_0[shape=box, color=blue,label="+"]
+_0_0 -- _0N
+_0N [label="2"]
+_0_0 -- _0_3;
+_0_3[shape=box, color=blue,label="*"]
+_0_3 -- _2N
+_2N [label="8"]
+_0_3 -- _0_4;
+_0_4[shape=box, color=blue,label="^"]
+_0_4 -- _4N
+_4N [label="6"]
+_0_4 -- _6N5;
+_6N5 [label="5"]
+}

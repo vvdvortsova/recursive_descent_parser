@@ -1,0 +1,14 @@
+<map id="Token" name="Token">
+<area shape="rect" id="node2" href="$class_add.html" title="Add" alt="" coords="5,80,51,107"/>
+<area shape="rect" id="node3" href="$class_cos.html" title="Cos" alt="" coords="75,80,122,107"/>
+<area shape="rect" id="node4" href="$class_div.html" title="Div" alt="" coords="147,80,189,107"/>
+<area shape="rect" id="node5" href="$class_end.html" title="End" alt="" coords="213,80,259,107"/>
+<area shape="rect" id="node6" href="$class_mul.html" title="Mul" alt="" coords="283,80,325,107"/>
+<area shape="rect" id="node7" href="$class_num.html" title="Num" alt="" coords="349,80,400,107"/>
+<area shape="rect" id="node8" href="$class_pair.html" title="Pair" alt="" coords="424,80,469,107"/>
+<area shape="rect" id="node9" href="$class_pow.html" title="Pow" alt="" coords="493,80,541,107"/>
+<area shape="rect" id="node10" href="$class_sin.html" title="Sin" alt="" coords="566,80,607,107"/>
+<area shape="rect" id="node11" href="$class_sub.html" title="Sub" alt="" coords="632,80,677,107"/>
+<area shape="rect" id="node12" href="$class_un_minus.html" title="UnMinus" alt="" coords="701,80,776,107"/>
+<area shape="rect" id="node13" href="$class_var.html" title="Var" alt="" coords="800,80,843,107"/>
+</map>
