@@ -1,5 +1,8 @@
 # Recursive descent parser
 
+This is a recursive descent calculator.\
+Continuation of this code - [the cure](https://github.com/vvdvortsova/the_cure_language) language .
+
 Sorry for mix c/c++, because
 I just started writing in c++.\
 The code will improve.
